@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+</head>
+
+<body>
+    <script>
+        function crearCarta() {
+            return Math.floor(Math.random()*11) + 1;
+        }
+
+        function iniciarJuego() {
+            let cartaCompu1 = crearCarta();
+            let cartaCompu2 = crearCarta();
+            let totalComputadora = cartaCompu1 + cartaCompu2;
+            let cartaUsuario1 = crearCarta();
+            let cartaUsuario2 = crearCarta();
+            let totalUsuario = cartaUsuario1 + cartaUsuario2;
+
+            alert("La computadora posee una carta secreta y otra revelada: " + cartaCompu2);
+
+            alert("Tus cartas son: " + cartaUsuario1 + " y " + cartaUsuario2 + "Tu total es: " + totalUsuario);
+
+            while (confirm("¿Deseas otra carta? El valor de tus cartas es: " + totalUsuario)) {
+                let nuevaCarta = crearCarta();
+                totalUsuario += nuevaCarta;
+                alert("Tu nueva carta vale " + nuevaCarta + ". Tu total es " + totalUsuario);
+                if (totalUsuario > 21) {
+                    alert("Perdiste, te has pasado de 21, tu total es " + totalUsuario + ". La computadora gano.");
+                    return;
+                }
+            }
+
+            alert("La computadora cuenta con las cartas " + cartaCompu1 + " y " + cartaCompu2 + ". Su total es: " + totalComputadora);
+
+            while (totalComputadora < 17) {
+                let nuevaCartaComputadora = crearCarta();
+                totalComputadora += nuevaCartaComputadora;
+            }
+
+            alert("La computadora ha tomado mas cartas  y su total es: " + totalComputadora);
+            alert("El total del jugador es " + totalUsuario);
+            alert("El total de la computadora es " + totalComputadora);
+
+            if (totalUsuario > totalComputadora && totalUsuario <= 21) {
+                alert("Felicidades has GANADO");
+            } else if (totalComputadora > totalUsuario && totalComputadora <= 21) {
+                alert("PERDISTE, La computadora gano.");
+            } else {
+                alert("Empataron");
+            }
+        }
+        iniciarJuego();
+    </script>
+</body>
+
+</html>
